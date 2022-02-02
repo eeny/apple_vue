@@ -3,18 +3,21 @@
     <a v-for="a in menus" :key="a">{{ a }}</a>
   </div>
 
-  <div v-for="a in products" :key="a">
-    <h4>{{ a }} 원룸</h4>
+  <div>
+    <h4>{{ products[0] }} 원룸</h4>
     <p>50 만원</p>
+    <button @click="increase(0)">허위매물신고</button> <span>신고수 : {{ reports[0] }}</span>
   </div>
-  <!-- <div>
+  <div>
     <h4>{{ products[1] }} 원룸</h4>
     <p>70 만원</p>
+    <button @click="increase(1)">허위매물신고</button> <span>신고수 : {{ reports[1] }}</span>
   </div>
   <div>
     <h4>{{ products[2] }} 원룸</h4>
     <p>90 만원</p>
-  </div> -->
+    <button @click="increase(2)">허위매물신고</button> <span>신고수 : {{ reports[2] }}</span>
+  </div>
 </template>
 
 <script>
@@ -25,9 +28,15 @@ export default {
   name: 'App',
   data(){
     return {
+      reports : [0, 0, 0],
       menus : ['Home', 'Shop', 'About'],
       products : ['역삼동원룸', '천호동원룸', '마포구원룸'],
     }
+  },
+  methods : {
+    increase(i){
+      this.reports[i]++;
+    },
   },
   components: {
   }
