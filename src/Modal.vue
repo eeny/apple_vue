@@ -36,6 +36,12 @@ export default {
     clickNum: Number,
     modalStatus: Boolean,
   },
+  updated() {
+    if (this.month == 2) {
+      alert("2개월은 선택하실 수 없습니다.");
+      this.month = 3;
+    }
+  },
 };
 </script>
 

@@ -28,7 +28,7 @@
     <a v-for="a in menus" :key="a">{{ a }}</a>
   </div>
 
-  <Discount />
+  <Discount v-if="showDiscount == true" />
 
   <button @click="priceSort">가격낮은순정렬</button>
   <button @click="priceSortReverse">가격높은순정렬</button>
@@ -56,6 +56,7 @@ export default {
   name: "App",
   data() {
     return {
+      showDiscount: true,
       oneroomsOrigin: [...data],
       object: { name: "kim", age: "20" },
       clickNum: 0,
@@ -96,6 +97,11 @@ export default {
         }
       });
     },
+  },
+  mounted() {
+    // setTimeout(() => {
+    //   this.showDiscount = false;
+    // }, 2000);
   },
   components: {
     Discount: Discount,
