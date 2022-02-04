@@ -1,8 +1,17 @@
 <template>
+
+  <!-- <div v-if="1 == 2">
+    안녕하세요
+  </div>
+  <div v-else-if="1 == 3">
+    안녕하세요2
+  </div> -->
+
   <div class="black-bg" v-if="modalStatus == true">
     <div class="white-bg">
-      <h4>상세페이지임</h4>
-      <p>상세페이지 내용임</p>
+      <img :src="onerooms[clickNum].image" alt="">
+      <h4>{{ onerooms[clickNum].title }}</h4>
+      <p>{{ onerooms[clickNum].price }}원 <br> {{ onerooms[clickNum].content }}</p>
       <button @click="modalStatus = false">닫기</button>
     </div>
   </div>
@@ -13,7 +22,7 @@
 
   <div v-for="(a,i) in onerooms" :key="i">
     <img :src="a.image" class="room-img">
-    <h4>{{ a.title }} 원룸</h4>
+    <h4 @click="modalStatus = true; clickNum = i">{{ a.title }} 원룸</h4>
     <p>{{ a.price }}원</p>
     <button @click="increase(0)">허위매물신고</button> <span>신고수 : {{ reports[0] }}</span>
   </div>
@@ -28,6 +37,7 @@ export default {
   name: 'App',
   data(){
     return {
+      clickNum : 0,
       onerooms : data,
       modalStatus : false,
       reports : [0, 0, 0],
@@ -93,7 +103,9 @@ div {
   margin-top: 40px;
 }
 
-
+.white-bg img {
+  width: 100%;
+}
 
 
 </style>
