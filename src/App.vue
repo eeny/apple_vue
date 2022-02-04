@@ -6,12 +6,23 @@
     안녕하세요2
   </div> -->
 
-  <Modal
-    @closeModal="modalStatus = false"
-    :onerooms="onerooms"
-    :clickNum="clickNum"
-    :modalStatus="modalStatus"
-  />
+  <!-- <div class="start" :class="{ end: modalStatus }">
+    <Modal
+      @closeModal="modalStatus = false"
+      :onerooms="onerooms"
+      :clickNum="clickNum"
+      :modalStatus="modalStatus"
+    />
+  </div> -->
+
+  <transition name="fade">
+    <Modal
+      @closeModal="modalStatus = false"
+      :onerooms="onerooms"
+      :clickNum="clickNum"
+      :modalStatus="modalStatus"
+    />
+  </transition>
 
   <div class="menu">
     <a v-for="a in menus" :key="a">{{ a }}</a>
@@ -28,42 +39,6 @@
     v-for="(a, i) in onerooms"
     :key="i"
   />
-  <!-- <Card
-    :onerooms="onerooms[0]"
-    :clickNum="clickNum"
-    :modalStatus="modalStatus"
-    :reports="reports"
-  />
-  <Card
-    :onerooms="onerooms[1]"
-    :clickNum="clickNum"
-    :modalStatus="modalStatus"
-    :reports="reports"
-  />
-  <Card
-    :onerooms="onerooms[2]"
-    :clickNum="clickNum"
-    :modalStatus="modalStatus"
-    :reports="reports"
-  />
-  <Card
-    :onerooms="onerooms[3]"
-    :clickNum="clickNum"
-    :modalStatus="modalStatus"
-    :reports="reports"
-  />
-  <Card
-    :onerooms="onerooms[4]"
-    :clickNum="clickNum"
-    :modalStatus="modalStatus"
-    :reports="reports"
-  />
-  <Card
-    :onerooms="onerooms[5]"
-    :clickNum="clickNum"
-    :modalStatus="modalStatus"
-    :reports="reports"
-  /> -->
 </template>
 
 <script>
@@ -155,5 +130,34 @@ div {
   padding: 10px;
   margin: 10px;
   border-radius: 5px;
+}
+
+.start {
+  opacity: 0;
+  transition: all 1s;
+}
+
+.end {
+  opacity: 1;
+}
+
+.fade-enter-from {
+  opacity: 0;
+}
+.fade-enter-active {
+  transition: all 1s;
+}
+.fade-enter-to {
+  opacity: 1;
+}
+
+.fade-leave-from {
+  opacity: 1;
+}
+.fade-leave-active {
+  transition: all 1s;
+}
+.fade-leave-to {
+  opacity: 0;
 }
 </style>
