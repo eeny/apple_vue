@@ -6,7 +6,12 @@
     안녕하세요2
   </div> -->
 
-  <Modal :onerooms="onerooms" :clickNum="clickNum" :modalStatus="modalStatus" />
+  <Modal
+    @closeModal="modalStatus = false"
+    :onerooms="onerooms"
+    :clickNum="clickNum"
+    :modalStatus="modalStatus"
+  />
 
   <div class="menu">
     <a v-for="a in menus" :key="a">{{ a }}</a>
@@ -15,10 +20,11 @@
   <Discount />
 
   <Card
+    @openModal="
+      modalStatus = true;
+      clickNum = $event;
+    "
     :onerooms="onerooms[i]"
-    :clickNum="clickNum"
-    :modalStatus="modalStatus"
-    :reports="reports"
     v-for="(a, i) in onerooms"
     :key="i"
   />
