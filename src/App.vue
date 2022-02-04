@@ -30,6 +30,11 @@
 
   <Discount />
 
+  <button @click="priceSort">가격낮은순정렬</button>
+  <button @click="priceSortReverse">가격높은순정렬</button>
+  <button @click="titleSort">상품명가나다순정렬</button>
+  <button @click="sortBack">되돌리기</button>
+
   <Card
     @openModal="
       modalStatus = true;
@@ -51,6 +56,7 @@ export default {
   name: "App",
   data() {
     return {
+      oneroomsOrigin: [...data],
       object: { name: "kim", age: "20" },
       clickNum: 0,
       onerooms: data,
@@ -63,6 +69,32 @@ export default {
   methods: {
     increase(i) {
       this.reports[i]++;
+    },
+    priceSort() {
+      this.onerooms.sort(function (a, b) {
+        return a.price - b.price;
+      });
+    },
+    sortBack() {
+      this.onerooms = [...this.oneroomsOrigin];
+    },
+    priceSortReverse() {
+      this.onerooms.sort(function (a, b) {
+        return b.price - a.price;
+      });
+    },
+    titleSort() {
+      this.onerooms.sort(function (a, b) {
+        if (a.title > b.title) {
+          return 1;
+        }
+        if (a.title < b.title) {
+          return -1;
+        }
+        if (a.title == b.title) {
+          return 0;
+        }
+      });
     },
   },
   components: {
