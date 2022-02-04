@@ -1,5 +1,4 @@
 <template>
-
   <!-- <div v-if="1 == 2">
     안녕하세요
   </div>
@@ -7,52 +6,90 @@
     안녕하세요2
   </div> -->
 
-  <div class="black-bg" v-if="modalStatus == true">
-    <div class="white-bg">
-      <img :src="onerooms[clickNum].image" alt="">
-      <h4>{{ onerooms[clickNum].title }}</h4>
-      <p>{{ onerooms[clickNum].price }}원 <br> {{ onerooms[clickNum].content }}</p>
-      <button @click="modalStatus = false">닫기</button>
-    </div>
-  </div>
+  <Modal :onerooms="onerooms" :clickNum="clickNum" :modalStatus="modalStatus" />
 
   <div class="menu">
     <a v-for="a in menus" :key="a">{{ a }}</a>
   </div>
 
-  <div v-for="(a,i) in onerooms" :key="i">
-    <img :src="a.image" class="room-img">
-    <h4 @click="modalStatus = true; clickNum = i">{{ a.title }} 원룸</h4>
-    <p>{{ a.price }}원</p>
-    <button @click="increase(0)">허위매물신고</button> <span>신고수 : {{ reports[0] }}</span>
-  </div>
+  <Discount />
+
+  <Card
+    :onerooms="onerooms[i]"
+    :clickNum="clickNum"
+    :modalStatus="modalStatus"
+    :reports="reports"
+    v-for="(a, i) in onerooms"
+    :key="i"
+  />
+  <!-- <Card
+    :onerooms="onerooms[0]"
+    :clickNum="clickNum"
+    :modalStatus="modalStatus"
+    :reports="reports"
+  />
+  <Card
+    :onerooms="onerooms[1]"
+    :clickNum="clickNum"
+    :modalStatus="modalStatus"
+    :reports="reports"
+  />
+  <Card
+    :onerooms="onerooms[2]"
+    :clickNum="clickNum"
+    :modalStatus="modalStatus"
+    :reports="reports"
+  />
+  <Card
+    :onerooms="onerooms[3]"
+    :clickNum="clickNum"
+    :modalStatus="modalStatus"
+    :reports="reports"
+  />
+  <Card
+    :onerooms="onerooms[4]"
+    :clickNum="clickNum"
+    :modalStatus="modalStatus"
+    :reports="reports"
+  />
+  <Card
+    :onerooms="onerooms[5]"
+    :clickNum="clickNum"
+    :modalStatus="modalStatus"
+    :reports="reports"
+  /> -->
 </template>
 
 <script>
-
-import data from './assets/oneroom';
-
+import data from "./assets/oneroom";
+import Discount from "./Discount.vue";
+import Modal from "./Modal.vue";
+import Card from "./Card.vue";
 
 export default {
-  name: 'App',
-  data(){
+  name: "App",
+  data() {
     return {
-      clickNum : 0,
-      onerooms : data,
-      modalStatus : false,
-      reports : [0, 0, 0],
-      menus : ['Home', 'Shop', 'About'],
-      products : ['역삼동원룸', '천호동원룸', '마포구원룸'],
-    }
+      object: { name: "kim", age: "20" },
+      clickNum: 0,
+      onerooms: data,
+      modalStatus: false,
+      reports: [0, 0, 0],
+      menus: ["Home", "Shop", "About"],
+      products: ["역삼동원룸", "천호동원룸", "마포구원룸"],
+    };
   },
-  methods : {
-    increase(i){
+  methods: {
+    increase(i) {
       this.reports[i]++;
     },
   },
   components: {
-  }
-}
+    Discount: Discount,
+    Modal: Modal,
+    Card: Card,
+  },
+};
 </script>
 
 <style>
@@ -107,5 +144,10 @@ div {
   width: 100%;
 }
 
-
+.discount {
+  background: #eee;
+  padding: 10px;
+  margin: 10px;
+  border-radius: 5px;
+}
 </style>
