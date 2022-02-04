@@ -7,41 +7,29 @@
     </div>
   </div>
 
-
-
   <div class="menu">
     <a v-for="a in menus" :key="a">{{ a }}</a>
   </div>
 
-  <div>
-    <img src="./assets/room0.jpg" class="room-img">
-    <h4 @click="modalStatus = true">{{ products[0] }} 원룸</h4>
-    <p>50 만원</p>
+  <div v-for="(a,i) in onerooms" :key="i">
+    <img :src="a.image" class="room-img">
+    <h4>{{ a.title }} 원룸</h4>
+    <p>{{ a.price }}원</p>
     <button @click="increase(0)">허위매물신고</button> <span>신고수 : {{ reports[0] }}</span>
-  </div>
-  <div>
-    <img src="./assets/room1.jpg" class="room-img">
-    <h4>{{ products[1] }} 원룸</h4>
-    <p>70 만원</p>
-    <button @click="increase(1)">허위매물신고</button> <span>신고수 : {{ reports[1] }}</span>
-  </div>
-  <div>
-    <img src="./assets/room2.jpg" class="room-img">
-    <h4>{{ products[2] }} 원룸</h4>
-    <p>90 만원</p>
-    <button @click="increase(2)">허위매물신고</button> <span>신고수 : {{ reports[2] }}</span>
   </div>
 </template>
 
 <script>
 
+import data from './assets/oneroom';
 
 
 export default {
   name: 'App',
   data(){
     return {
-      modalStatus : true,
+      onerooms : data,
+      modalStatus : false,
       reports : [0, 0, 0],
       menus : ['Home', 'Shop', 'About'],
       products : ['역삼동원룸', '천호동원룸', '마포구원룸'],
