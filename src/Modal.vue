@@ -20,6 +20,17 @@ export default {
       month: 1,
     };
   },
+  watch: {
+    month(a) {
+      if (a >= 13) {
+        alert("13이상 입력할 수 없습니다");
+        this.month = 1;
+      } else if (isNaN(a) == true) {
+        alert("문자는 입력할 수 없습니다");
+        this.month = 1;
+      }
+    },
+  },
   props: {
     onerooms: Array,
     clickNum: Number,
